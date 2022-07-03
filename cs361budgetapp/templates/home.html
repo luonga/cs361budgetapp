@@ -7,5 +7,69 @@
   <body>
     <h1> CS361 Budget App </h1>
     <p> Welcome to my app! </p>
+    <p> Instructions: </p>
   </body>
+  <h2>Monthly Income:</h2>
+  <form>
+    <label for="paycheck">Paycheck (after-tax):</label>
+    <input type="number" id="paycheck" name="paycheck"><br><br>
+    <label for="otherincome">Other Income:</label>
+    <input type="number" id="otherincome" name="otherincome"><br><br>
+    <input type="button" onclick="calcIncome(document.getElementById('paycheck').value, document.getElementById('otherincome').value)" value="Calculate monthly income">
+  </form>
+  <p>Total monthly income:</p>
+  <p id = "monIncome"></p>
+  <h2>Monthly Spending:</h2>
+  <form>
+    <label for="housing">Housing:</label>
+    <input type="number" id="housing" name="housing"><br><br>
+    <label for="utilities">Utilities:</label>
+    <input type="number" id="utilities" name="utilities"><br><br>
+    <label for="transportation">Transportation:</label>
+    <input type="number" id="transportation" name="transportation"><br><br>
+    <label for="food">Food:</label>
+    <input type="number" id="food" name="food"><br><br>
+    <label for="debt">Loan/debt repayment:</label>
+    <input type="number" id="debt" name="debt"><br><br>
+    <label for="other">Other:</label>
+    <input type="number" id="other" name="other"><br><br>
+    <input type="button" onclick="calcSpending(document.getElementById('housing').value, document.getElementById('utilities').value, document.getElementById('transportation').value, document.getElementById('food').value, document.getElementById('debt').value, document.getElementById('other').value)" value="Calculate monthly spending">
+  </form>
+  <p>Total monthly spending:</p>
+  <p id = "monSpending"></p>
+  <h2>Monthly Net Gain/Loss:</h2>
+  <form>
+    <input type="button" onclick="calcTotal()" value="Calculate total net gain/loss">
+  </form>
+  <p id = "total"></p>
+<script>
+  var income;
+  var spending;
+  function calcIncome(a, b) {
+    income = parseInt(a, 10) + parseInt(b, 10);
+    document.getElementById('monIncome').innerHTML = income;
+  };
+
+  function calcSpending(a, b, c, d, e, f) {
+    var a = parseInt(a, 10);
+    var b = parseInt(b, 10);
+    var c = parseInt(c, 10);
+    var d = parseInt(d, 10);
+    var e = parseInt(e, 10);
+    var f = parseInt(f, 10);
+    spending = a + b + c + d + e + f;
+    document.getElementById('monSpending').innerHTML = spending;
+  }
+
+  function calcTotal() {
+    var total = income - spending;
+    document.getElementById('total').innerHTML = total;
+  }
+</script>
+
+
+
+
+  
+
 </html>

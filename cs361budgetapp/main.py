@@ -5,3 +5,6 @@ app = Flask(__name__)
 def index():
   return render_template("home.html")
 
+@app.route('/calculator')
+def calculator():
+  return render_template("calculator.html")

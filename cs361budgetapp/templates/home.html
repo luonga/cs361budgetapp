@@ -1,35 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-  <head>
-    <meta charset="utf-8">
-    <style>
-      * {
-        box-sizing: border-box;
-      }
 
-      .column {
-        float: left;
-        width: 50%;
-        padding: 10px;
-      }
-            
-      .row:after {
-        content: "";
-        display: table;
-        clear: both;
-      }
-    </style>
+  <head>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/mainpage.css') }}">
+    <meta charset="utf-8">
     <title>Homepage</title>
   </head>
+
   <body>
   <div class ="row">
     <div class="column" style="background-color:#aaa;">
       <h1> CS361 Budget App </h1>
       <p> Welcome to my app! </p>
+      <input type="button" value="Open a Popup Window" onclick="window.open('file:C:\Users\aluon\OneDrive\Desktop\school\CS 361\cs361budgetapp\templates\calculator.html'); return false");">
       <p> Instructions: Please enter the amount you earn every month in each respective category.  Click "Calcuate monthly income" to see your total monthly income.</p>
     </body>
+
     <h2>Monthly Income:</h2>
+
     <form>
       <label for="paycheck">Paycheck (after-tax):</label>
       <input type="number" id="paycheck" name="paycheck" value = 0><br><br>
@@ -37,10 +26,13 @@
       <input type="number" id="otherincome" name="otherincome" value = 0><br><br>
       <input type="button" onclick="calcIncome(document.getElementById('paycheck').value, document.getElementById('otherincome').value)" value="Calculate monthly income">
     </form>
+
     <p>Total monthly income:</p>
+
     <p id = "monIncome"></p>
     <p> Instructions: Please enter the amount you spend every month in each respective category.  Click "Calcuate monthly spending" to see your total monthly spending.  You will also see the graphical breakdown of your monthly spending on the right column.</p>
     <h2>Monthly Spending:</h2>
+
     <form>
       <label for="housing">Housing:</label>
       <input type="number" id="housing" name="housing" value = 0><br><br>
@@ -56,13 +48,16 @@
       <input type="number" id="other" name="other" value = 0><br><br>
       <input type="button" onclick="calcSpending(document.getElementById('housing').value, document.getElementById('utilities').value, document.getElementById('transportation').value, document.getElementById('food').value, document.getElementById('debt').value, document.getElementById('other').value)" value="Calculate monthly spending">
     </form>
+
     <p>Total monthly spending:</p>
     <p id = "monSpending"></p>
     <p> Instructions: Click on "Calculate total net gain/loss" to see your monthly net gain or loss.</p>
     <h2>Monthly Net Gain/Loss:</h2>
+
     <form>
       <input type="button" onclick="calcTotal()" value="Calculate total net gain/loss">
     </form>
+
     <p id = "total"></p>
   </div>
   <div class="column" style="background-color:#bbb;">
@@ -70,96 +65,6 @@
     <canvas id="pieChart" style="width:100%;max-width:600px"></canvas>
   </div>
 </div>
-    
-<script>
-  var income;
-  var spending;
-  var housing;
-  var utilities;
-  var transportation;
-  var food;
-  var debt;
-  var other;
-  function calcIncome(a, b) {
-    if (a < 0 || b < 0) {
-      alert("Please enter a positive number!");
-      return
-    };    
-    income = parseInt(a, 10) + parseInt(b, 10);
-    document.getElementById('monIncome').innerHTML = '$' + income;
-  };
 
-  function calcSpending(a, b, c, d, e, f) {
-    if (a < 0 || b < 0 || c < 0 || d < 0 || e < 0 || f < 0)  {
-      alert("Please enter a positive number!");
-      return
-    }; 
-    housing = parseInt(a, 10);
-    utilities = parseInt(b, 10);
-    transportation = parseInt(c, 10);
-    food = parseInt(d, 10);
-    debt = parseInt(e, 10);
-    other = parseInt(f, 10);
-    spending = housing + utilities + transportation + food + debt + other;
-    document.getElementById('monSpending').innerHTML = '$' + spending;
-
-    
-    var xValues = ["Housing", "Utilities", "Transportation", "Food", "Debt", "Other"];
-    var yValues = [housing, utilities, transportation, food, debt, other];
-    var barColors = [
-      "#b91d47",
-      "#00aba9",
-      "#2b5797",
-      "#e8c3b9",
-      "#1e7145",
-      "#FF5733"
-    ];
-
-    new Chart("barChart", {
-      type: "bar",
-      data: {
-        labels: xValues,
-        datasets: [{
-          backgroundColor: barColors,
-          data: yValues
-        }]
-      },
-      options: {
-        legend: { display: false },
-        title: {
-          display: true,
-          text: "Monthly Spending Breakdown"
-        }
-      }
-    });
-    
-    new Chart("pieChart", {
-      type: "pie",
-      data: {
-        labels: xValues,
-        datasets: [{
-          backgroundColor: barColors,
-          data: yValues
-        }]
-      },
-      options: {
-        title: {
-          display: false,
-          text: "Monthly Spending Breakdown"
-        }
-      }
-    });
-  }
-
-  function calcTotal() {
-    var total = income - spending;
-    document.getElementById('total').innerHTML = '$' + total;
-  }
-</script>
-
-
-
-
-  
-
+<script type="text/javascript" src="../static/calculate.js"></script>   
 </html>

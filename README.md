@@ -1,2 +1,2 @@
 # How to open application
-Go to https://cs361budgetapp.herokuapp.com/
+Go to https://budgetapp-391914.uc.r.appspot.com/
